@@ -8,6 +8,7 @@ Summary:        A fast metadata parser for yum
 Url:            http://linux.duke.edu/projects/yum/
 Group:          Development/Libraries
 Source0:        http://linux.duke.edu/projects/yum/download/%{name}/%{name}-%{version}.tar.gz
+Source1001: 	yum-metadata-parser.manifest
 BuildRequires:  pkgconfig
 BuildRequires:  sqlite-devel
 BuildRequires:  pkgconfig(glib-2.0)
@@ -21,6 +22,7 @@ Fast metadata parser for yum implemented in C.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 python setup.py build
@@ -30,6 +32,7 @@ rm -rf %{buildroot}
 python setup.py install -O1 --root=%{buildroot}
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{python_sitelib_platform}/_sqlitecache.so
 %{python_sitelib_platform}/sqlitecachec.py
